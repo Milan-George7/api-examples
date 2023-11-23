@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div style="height: 100vh;" class="d-flex justify-content-center align-items-center w-100 bg-dark">
+        <div class="border w-50 p-5 text-center shadow rounded">
+            <h1 id="result" class="text-danger">Lottery Prediction</h1>
+        </div>
+    </div>
+</body>
+
+<!-- using promise technique -->
+<script>
+const lotterystatus = new Promise((resolve,reject)=>{
+    let myLottery = 3
+    let winnerLottery = Math.floor(Math.random()*5)+1
+    if(winnerLottery==myLottery){
+        resolve("you won Lottery")
+    }else{
+        reject("Better luck next Time !")
+    }
+})
+lotterystatus.then((data)=>{
+    result.innerHTML = data
+}).catch((data)=>{
+    result.innerHTML = data
+})
+</script>
+</html>
