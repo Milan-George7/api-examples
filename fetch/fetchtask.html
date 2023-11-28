@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Post</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center text-primary m-5">Blog Page</h1>
+        <div id="result" class="row">
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+
+    fetch("https://dummyjson.com/users").then((response)=>{
+        response.json().then((users)=>{
+            users.forEach(user => {
+                result.innerHTML += `
+                <div class="col mb-4">
+                    <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${user.firstName}</h5>
+   
+   
+  </div>
+</div>
+                </div>
+                `
+            })
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+</script>
+
+</html>

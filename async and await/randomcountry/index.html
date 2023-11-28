@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Selector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background: #0f0c29;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+    </style>
+
+</head>
+<body>
+    <div class="w-100  d-flex justify-content-center flex-column" style="height: 100%;">
+        <h2 class="text-center " style="color: #00b09b; text-shadow: 2px 1px black;">Find  Random Country</h2>
+        <div class="text-center mt-5"><button onclick="getCountry()" class="btn btn-warning fw-bold">Random Country   <i class="fa-solid fa-magnifying-glass"></i></button></div>
+        <div id="result" class="d-flex justify-content-center mt-5">
+            
+        </div>
+    </div>
+</body>
+<script>
+   const getCountry = async()=>{
+    const countryDetails=await fetch("https://restcountries.com/v3.1/all")
+    const detailedCountry=await countryDetails.json()
+    const randomCountry=detailedCountry[Math.floor(Math.random()*detailedCountry.length)]
+    const flag=randomCountry.flags.png
+    const cname=randomCountry.name.common
+    const capital=randomCountry.capital
+    const population=randomCountry.population
+    const timeZone=randomCountry.timezones
+    const continents=randomCountry.continents
+    const gmap=randomCountry.maps.googleMaps
+    const languages=Object.values(randomCountry.languages)
+    const currencies=Object.values(randomCountry.currencies)
+    const currenciesName=currencies[0].name
+    const currenciesSymbol=currencies[0].symbol
+    console.log(currenciesSymbol);
+
+    result.innerHTML=`
+
+    <div class="card" style="width: 18rem;">
+                <img src="${flag}" class="card-img-top border" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">${cname}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary"> <span class="text-black">Capital:</span> ${capital}</li>
+                  <li class="list-group-item text-danger"> <span class="text-black">Population:</span> ${population}</li>
+                  <li class="list-group-item text-success"> <span class="text-black">Timezone: </span>${timeZone}</li>
+                  <li class="list-group-item text-primary"> <span class="text-black">Continents: </span> ${continents}</li>
+                  <li class="list-group-item text-primary"> <span class="text-black">Languages: </span> ${languages}</li>
+                  <li class="list-group-item text-primary"> <span class="text-black">Currencies: </span>${currenciesName},${currenciesSymbol}</li>
+                </ul>
+                <div class="card-body text-center">
+                  <a style="text-decoration:none;" href="${gmap}" class="card-link"><i class="fa-solid fa-location-dot"></i> Google map</a>
+              </div>
+    `
+   }
+   
+</script>
+</html>
